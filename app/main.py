@@ -39,6 +39,12 @@ def add_me(number_1: int, number_2: int):
     sum = number_1 + number_2
     return {"sum": sum}
 
+# addition for lab 6
+@app.get("/add/{number_1}/{number_2}")
+def add_me(number_1: int, number_2: int):
+    sum = number_1 * number_2
+    return {"product": product}
+
 ## Parameters
 # Introduce parameter data types and defaults from the Optional library
 @app.get("/items/{item_id}")
