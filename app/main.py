@@ -4,16 +4,18 @@ from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
 import json
-import requests
-import boto3
+import os
+import MySQLdb
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static", html = True), name="static")
 
-# The URL for this API has a /docs endpoint that lets you see and test
-# your various endpoints/methods.
-
-# The zone apex is the 'default' page for a URL
-# This will return a simple hello world via GET method.
+# db config stuff
+DBHOST = os.environ.get('DBHOST')
+DBUSER = os.environ.get('DBUSER')
+DBPASS = os.environ.get('DBPASS')
+DB = "nem2p"
 
 @app.get("/")  # zone apex
 def zone_apex():
