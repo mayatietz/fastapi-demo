@@ -2,13 +2,10 @@ uvicorn
 fastapi
 typing
 pydantic
-<<<<<<< HEAD
 requests
 uvicorn
 boto3
 redis
-=======
 pymongo
 dnspython
->>>>>>> cb62cff4025340d90a8b5f53bf5199bcb34da29f
 mysqlclient

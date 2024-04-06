@@ -25,12 +25,21 @@ DB = "met9krd"  # replace with your UVA computing ID / database name
 # The zone apex is the 'default' page for a URL
 # This will return a simple hello world via GET method.
 
-#@app.get("/")  # zone apex
-#def zone_apex():
-   #return {"Hello": "Hello Maya"}
+@app.get("/")  # zone apex
+def zone_apex():
+   return {"Hello": "Hello Maya"}
 
 @app.get("/albums")
 def get_albums():
+    db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
+    c = db.cursor(MySQLdb.cursors.DictCursor)
+    c.execute("""SELECT * FROM albums ORDER BY name""")
+    results = c.fetchall()
+    db.close()
+    return results
+
+@app.get("/albums/{id}")
+def get_an_album(id):
     db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
     c = db.cursor(MySQLdb.cursors.DictCursor)
     c.execute("""SELECT * FROM albums ORDER BY name""")
