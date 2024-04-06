@@ -17,7 +17,7 @@ app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 DBHOST = os.environ.get('DBHOST')
 DBUSER = os.environ.get('DBUSER')
 DBPASS = os.environ.get('DBPASS')
-DB = "mst3k"  # replace with your UVA computing ID / database name
+DB = "met9krd"  # replace with your UVA computing ID / database name
 
 # The URL for this API has a /docs endpoint that lets you see and test
 # your various endpoints/methods.
@@ -27,7 +27,7 @@ DB = "mst3k"  # replace with your UVA computing ID / database name
 
 #@app.get("/")  # zone apex
 #def zone_apex():
- #   return {"Hello": "Hello Maya"}
+   #return {"Hello": "Hello Maya"}
 
 @app.get("/albums")
 def get_albums():
@@ -35,6 +35,7 @@ def get_albums():
     c = db.cursor(MySQLdb.cursors.DictCursor)
     c.execute("""SELECT * FROM albums ORDER BY name""")
     results = c.fetchall()
+    db.close()
     return results
     
 # api calls within an api!
@@ -88,25 +89,25 @@ def get_albums():
 #     "tax": 381
 # }
 
-class Item(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: float
-    tax: Optional[float] = None
+#class Item(BaseModel):
+ #   name: str
+  #  description: Optional[str] = None
+   # price: float
+   # tax: Optional[float] = None
 
 # Start using the "Item" BaseModel
 # Post / Delete / Patch methods
-@app.post("/items/{item_id}")
-def add_item(item_id: int, item: Item):
-    return {"item_id": item_id, "item_name": item.name}
+#@app.post("/items/{item_id}")
+#def add_item(item_id: int, item: Item):
+   # return {"item_id": item_id, "item_name": item.name}
 
-@app.delete("/items/{item_id}")
-def delete_item(item_id: int, item: Item):
-    return {"action": "deleted", "item_id": item_id}
+#@app.delete("/items/{item_id}")
+#def delete_item(item_id: int, item: Item):
+  #  return {"action": "deleted", "item_id": item_id}
 
-@app.patch("/items/{item_id}")
-def patch_item(item_id: int, item: Item):
-    return {"action": "patch", "item_id": item_id}
+#@app.patch("/items/{item_id}")
+#def patch_item(item_id: int, item: Item):
+   # return {"action": "patch", "item_id": item_id}
 
 
 # Use another library to make an external API request.
